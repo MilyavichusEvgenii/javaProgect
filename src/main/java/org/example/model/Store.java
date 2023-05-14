@@ -46,6 +46,13 @@ public class Store <Designer, User> implements ServiceOfStore{
             System.out.println("""
                     Чтоб играть: нажмите '1'
                     для выхода, нажмите '0'""");
+            if (this.assort.size() == 0) {
+                System.out.println("Игрушки в магазине закончилис, игра окончена.");
+                if (user.getBag().size() > 0) {
+                    writerToFile.writeToFile(user);
+                }
+                break;
+            }
             if (user.getMoney() == 0) {
                 System.out.println("У вас закончились коины, игра окончена.");
                 if (user.getBag().size() > 0) {
@@ -83,32 +90,40 @@ public class Store <Designer, User> implements ServiceOfStore{
         Scanner a = new Scanner(System.in);
         int choice;
         int money = 0;
-        for (int i = 0; i < user.getBag().size(); i++) {
+//        for (int i = 0; i < user.getBag().size(); i++) {
+        while (user.getBag().size() != 0) {
             System.out.println(user.getBag().get(user.getBag().size() - 1).toString());
             System.out.println("""
-                Для продажи предмета нажмите '1'
-                если не хотите продавать, нажмите '2'
-                для выхода из режима продажи предметов, нажмите '0'.""");
+                    Для продажи предмета нажмите '1'
+                    если не хотите продавать, нажмите '2'
+                    для выхода из режима продажи предметов, нажмите '0'.""");
             choice = a.nextInt();
-            if(choice == 1){
-                if(user.getBag().get(i) instanceof org.example.model.Designer){
-                    money += 150;
+            if (choice == 1) {
+                if (user.getBag().get(user.getBag().size() - 1) instanceof org.example.model.Designer && user.getBag().size() > 0) {
+                    money += 300;
+                    user.getBag().remove(user.getBag().size() - 1);
                 }
-                if(user.getBag().get(i) instanceof org.example.model.Railway){
+                else if (user.getBag().get(user.getBag().size() - 1) instanceof org.example.model.Railway && user.getBag().size() > 0) {
+                    money += 200;
+                    user.getBag().remove(user.getBag().size() - 1);
+
+                }
+                else if (user.getBag().get(user.getBag().size() - 1) instanceof org.example.model.Truck && user.getBag().size() > 0) {
                     money += 100;
+                    user.getBag().remove(user.getBag().size() - 1);
                 }
-                if(user.getBag().get(i) instanceof org.example.model.Designer){
-                    money += 50;
+                if (user.getBag().size() == 0) {
+                    break;
                 }
             }
             if (choice == 2) {
-                money +=0;
+                money += 0;
             }
-            if (choice == 0){
+            if (choice == 0) {
                 break;
             }
-
         }
+//        }
         money = money + user.getMoney();
         user.setMoney(money);
     }
