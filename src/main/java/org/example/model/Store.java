@@ -90,7 +90,6 @@ public class Store <Designer, User> implements ServiceOfStore{
         Scanner a = new Scanner(System.in);
         int choice;
         int money = 0;
-//        for (int i = 0; i < user.getBag().size(); i++) {
         while (user.getBag().size() != 0) {
             System.out.println(user.getBag().get(user.getBag().size() - 1).toString());
             System.out.println("""
@@ -123,7 +122,6 @@ public class Store <Designer, User> implements ServiceOfStore{
                 break;
             }
         }
-//        }
         money = money + user.getMoney();
         user.setMoney(money);
     }
