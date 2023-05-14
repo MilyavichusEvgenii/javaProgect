@@ -1,0 +1,4 @@
+Designer{name='Конструктор', ID=3, frequencyOfLoss=10}
+ Truck{name='Грузовик', ID=11, frequencyOfLoss=5}
+ Designer{name='Конструктор', ID=4, frequencyOfLoss=10}
+ 
